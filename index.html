@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WEBSITE</title>
+    <!--CSS font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- CSS Website -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!--Icon-->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+  </head>
+
+  <body onload="typeEffect(document.getElementById('text'), 100);">
+    <!--Navbar Start-->
+    <nav class="navbar" x-data="products">
+      <!--Navbar-->
+      <a href="index.html" class="navbar-logo">Anarchist<span>Store</span></a>
+      <!-- Navbar Menu Start -->
+      <div class="navbar-nav">
+        <a href="#home">Home</a>
+        <a href="#about">About us</a>
+        <a href="#menu">Brand</a>
+        <a href="#products">Stock</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <!-- Navbar Menu End -->
+
+      <!-- Navbar Fitur Start -->
+      <div class="navbar-extra" x-data="" x-ref="navbar">
+        <a href="#" id="search-button"><i data-feather="search"></i></a>
+        <a
+          href="#"
+          id="shopping-cart-button"
+          @click.prevent="$refs.navbar.cartOpen = !$refs.navbar.cartOpen"
+          ><i data-feather="shopping-cart"></i>
+          <span
+            class="quantity-badge"
+            x-show="$store.cart.quantity"
+            x-text="$store.cart.quantity"
+          ></span>
+        </a>
+        <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+      </div>
+      <!-- Navbar Fitur End -->
+
+      <!-- Search strat -->
+      <div class="form-search">
+        <input type="search" id="search-box" placeholder="search.." />
+        <label for="search-box"><i data-feather="search"></i></label>
+      </div>
+      <!-- Search End -->
+
+      <!-- Shopping Cart Start -->
+      <div class="shopping-cart">
+        <template x-for="(item, index) in $store.cart.items" x-key="index">
+          <div class="cart-item">
+            <img :src="`img/menu/${item.img}`" :alt="item.name" />
+            <div class="item-detail">
+              <h3 x-text="item.name"></h3>
+              <div class="item-price">
+                <span x-text="rp(item.price)"></span>&times;
+                <button id="remove" @click="$store.cart.remove(item.id)">
+                  &minus;
+                </button>
+                <span x-text="item.quantity">1</span>
+                <button id="add" @click="$store.cart.add(item)">&plus;</button
+                >&equals;
+                <span x-text="rp(item.total)"></span>
+              </div>
+            </div>
+          </div>
+        </template>
+        <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem">
+          Your cart is Empty
+        </h4>
+        <h4 x-show="$store.cart.items.length">
+          Total:
+          <span x-text="rp($store.cart.total)"></span>
+        </h4>
+
+        <div class="form-container" x-show="$store.cart.items.length">
+          <form action="" id="checkoutForm">
+            <input
+              type="hidden"
+              name="items"
+              x-model="JSON.stringify($store.cart.items)"
+            />
+            <input type="hidden" name="total" x-model="$store.cart.total" />
+            <h5>Data Customer</h5>
+            <label for="name">
+              <span>Name</span>
+              <input type="text" name="name" id="name" />
+            </label>
+            <label for="email">
+              <span>Email</span>
+              <input type="email" name="email" id="email" />
+            </label>
+            <label for="phone">
+              <span>Phone</span>
+              <input type="number" name="phone" id="phone" autocomplete="off" />
+            </label>
+
+            <button
+              class="checkout-button disabled"
+              type="submit"
+              id="checkout-button"
+              value="checkout"
+            >
+              Checkout
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- Shopping Cart End -->
+    </nav>
+    <!--Navbar End-->
+
+    <!-- Hero Section Start -->
+    <section class="hero" id="home">
+      <div class="background-slideshow">
+        <img src="img/skateboard-1.jpg" alt="page 1" class="active" />
+      </div>
+      <div class="background-slideshow">
+        <img src="img/skateboard-3.jpg" alt="page 2" />
+      </div>
+      <div class="background-slideshow">
+        <img src="img/sakateboard.jpg" alt="page 3" />
+      </div>
+      <div class="background-slideshow">
+        <img src="img/skateboard-4.jpg" alt="page 3" />
+      </div>
+
+      <main class="content">
+        <h1>Let's Playing Skateboard Baby..</h1>
+        <p id="text">
+          Bermain skateboar hingga larut malam bukanlah hal yang buruk,
+          ketimbang berjalan bersamanya yang tidak ada kepastian chuakksss.....
+        </p>
+        <a href="#" class="cta">Buy Now</a>
+      </main>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- About section start -->
+    <section id="about" class="about">
+      <div class="about-content" id="about-content">
+        <h2><span>About</span> us</h2>
+        <div class="row">
+          <div class="about-img">
+            <img src="img/about-img.jpg" alt="About us" />
+          </div>
+          <div class="content">
+            <h3>Why choose us?</h3>
+            <p>
+              Kami memberikan servis yang baik kepada para customer, sehingga
+              anda akan merasa puas membeli barang di toko kami. Barang yang
+              kami jual memiliki kualitas yang baik, dengan menjual berbagai
+              brand luar. Tidak ada pemalsuan prduk, kami menghargai setiap
+              karya para brand. Sehingga tidak ada produk kw, premium dan
+              sebagainya disini.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About section End -->
+
+    <!-- Menu section Start -->
+    <section id="menu" class="menu">
+      <div class="content-brand brand" id="content">
+        <h2><span>Brand</span> Catalog</h2>
+        <p>
+          Brand luar yang tersedia di dalam store kami. Sehingga anda tidak
+          perlu khawatir dengan kualitas produk yang kami jual.
+        </p>
+        <div class="row">
+          <div class="menu-card">
+            <img src="brand/creature.jpg" alt="img1" class="menu-card-img" />
+            <h3 class="menu-card-title">- Creature -</h3>
+            <!-- <p class="menu-card-price">IDR 980.000</p> -->
+          </div>
+          <div class="menu-card">
+            <img src="brand/independent.jpg" alt="img2" class="menu-card-img" />
+            <h3 class="menu-card-title">- independent -</h3>
+            <!-- <p class="menu-card-price">IDR 980.000</p> -->
+          </div>
+          <div class="menu-card">
+            <img src="brand/primitive.jpg" alt="img3" class="menu-card-img" />
+            <h3 class="menu-card-title">- Primitive -</h3>
+            <!-- <p class="menu-card-price">IDR 980.000</p> -->
+          </div>
+          <div class="menu-card">
+            <img src="brand/toymachine.jpg" alt="img4" class="menu-card-img" />
+            <h3 class="menu-card-title">- Toy Machine -</h3>
+            <!-- <p class="menu-card-price">IDR 980.000</p> -->
+          </div>
+          <div class="menu-card">
+            <img src="brand/motion.jpg" alt="img5" class="menu-card-img" />
+            <h3 class="menu-card-title">- Motion -</h3>
+            <!-- <p class="menu-card-price">IDR 980.000</p> -->
+          </div>
+          <div class="menu-card">
+            <img src="brand/bendavis.jpg" alt="img6" class="menu-card-img" />
+            <h3 class="menu-card-title">- Ben Davis -</h3>
+            <!-- <p class="menu-card-price">IDR 980.000</p> -->
+          </div>
+          <div class="menu-card">
+            <img src="brand/traseher.jpg" alt="img7" class="menu-card-img" />
+            <h3 class="menu-card-title">- Thrasher -</h3>
+            <!-- <p class="menu-card-price">IDR 980.000</p> -->
+          </div>
+          <div class="menu-card">
+            <img src="brand/deathwish.jpg" alt="img8" class="menu-card-img" />
+            <h3 class="menu-card-title">- Deathwish -</h3>
+            <!-- <p class="menu-card-price">IDR 980.000</p> -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Menu section End -->
+
+    <!-- Product Section Start-->
+    <section class="products" id="products" x-data="products">
+      <h2>Ready <span>Stock</span></h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, numquam
+        placeat! Tempore corporis eveniet ex.
+      </p>
+      <div class="row">
+        <template x-for="(item, index) in items" x-key="index">
+          <div class="product-card">
+            <div class="product-icons">
+              <a href="#" @click.prevent="$store.cart.add(item)">
+                <!-- Button add untuk menambah produk kedalam cart -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-cart"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
+                  />
+                </svg>
+              </a>
+              <a href="#" class="item-detail-button">
+                <!-- Button details untuk melihat detail produk-->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-eye"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"
+                  />
+                  <path
+                    d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div class="product-img">
+              <img :src="`img/menu/${item.img}`" :alt="item.name" />
+            </div>
+            <div class="product-content">
+              <h3 x-text="item.name"></h3>
+              <div class="product-star">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-star-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-star-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-star-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-star-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-star-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                  />
+                </svg>
+              </div>
+              <div class="product-price">
+                <span x-text="rp(item.price)"></span>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+    <!-- Product Section End -->
+
+    <!-- Contact section start -->
+    <section id="contact" class="contact">
+      <h2><span>Contact</span> Store</h2>
+      <p>
+        Anda dapat menghubungi kami jika memiliki kendala atau informasi lebih
+        lanjut.
+      </p>
+
+      <div class="row">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.0767243174682!2d103.94797297552189!3d1.1047181623136026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d98b7cc6115fa3%3A0x83794eab5e3b7ad4!2sJl.%20Kartini%20VI%2C%20Sungai%20Harapan%2C%20Kec.%20Sekupang%2C%20Kota%20Batam%2C%20Kepulauan%20Riau%2029425!5e0!3m2!1sid!2sid!4v1701330125939!5m2!1sid!2sid"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="map"
+        ></iframe>
+        <form action="">
+          <div class="input-group">
+            <i data-feather="user"></i>
+            <input type="text" placeholder="Full Name" />
+          </div>
+          <div class="input-group">
+            <i data-feather="mail"></i>
+            <input type="email" placeholder="Email Address" />
+          </div>
+          <div class="input-group">
+            <i data-feather="phone"></i>
+            <input type="number" placeholder="Mobile Number" />w
+          </div>
+          <button type="submit" class="btn">Submit</button>
+        </form>
+      </div>
+    </section>
+    <!-- Contact section End -->
+
+    <!-- Footer start -->
+    <footer>
+      <div class="socials">
+        <a href="https://www.instagram.com/mhdilhaaaamm/"
+          ><i data-feather="instagram"></i
+        ></a>
+        <a href="#"><i data-feather="facebook"></i></a>
+      </div>
+
+      <div class="links">
+        <a href="#home">Home</a>
+        <a href="#about">About us</a>
+        <a href="#menu">Menu</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="credit">
+        <p>
+          Create by <a href="https://github.com/mhdilhaammm">Muhammad Ilham</a>.
+          | &copy; 2023
+        </p>
+      </div>
+    </footer>
+    <!-- Footer End -->
+    <!-- Modal item details Start -->
+    <div id="myModal" class="modal">
+      <div class="modal-container">
+        <a href="" class="close-icon"><i data-feather="x"></i></a>
+        <div class="modal-content">
+          <img src="img/menu/creature.jpg" alt="Product 1" />
+          <div class="product-content">
+            <h3>Creature Deck 8.0</h3>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis
+              dignissimos, exercitationem natus veniam ex neque ratione eaque
+              quibusdam reprehenderit, id ad dicta aut reiciendis animi!
+            </p>
+            <div class="product-star">
+              <i data-feather="star" class="star"></i>
+              <i data-feather="star" class="star"></i>
+              <i data-feather="star" class="star"></i>
+              <i data-feather="star" class="star"></i>
+              <i data-feather="star"></i>
+            </div>
+            <div class="product-price">IDR 890K</div>
+            <a href="#"
+              ><i data-feather="shopping-cart"></i><span>add to Cart</span></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal item details End -->
+
+    <!--javscript icon-->
+    <script>
+      feather.replace();
+    </script>
+    <!--Javascript sidebar-->
+    <script src="js/main.js"></script>
+    <!-- src folder alphine js -->
+    <script src="src/app.js"></script>
+    <!-- Alphine js -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </body>
+</html>
