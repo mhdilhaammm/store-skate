@@ -2,7 +2,6 @@
   --primary: #b6895b;
   --bg: #a9b388;
 }
-
 * {
   margin: 0;
   padding: 0;
@@ -31,29 +30,24 @@ body {
   right: 0;
   z-index: 9999;
 }
-
 .navbar .navbar-logo {
   font-size: 2rem;
   font-weight: 700;
   color: #fff;
 }
-
 .navbar .navbar-logo span {
   color: #6b240c;
   font-style: italic;
 }
-
 .navbar .navbar-nav a {
   color: #fff;
   display: inline-block;
   font-size: 1.3rem;
   margin: 0 1rem;
 }
-
 .navbar .navbar-nav a:hover {
   color: #6b240c;
 }
-
 .navbar .navbar-nav a::after {
   content: "";
   display: block;
@@ -62,20 +56,16 @@ body {
   transform: scaleX(0);
   transition: 0.2s linear;
 }
-
 .navbar .navbar-nav a:hover::after {
   transform: scaleX(0.5);
 }
-
 .navbar .navbar-extra a {
   color: #fff;
   margin: 0 0.5;
 }
-
 .navbar .navbar-extra a:hover {
   color: #6b240c;
 }
-
 #hamburger-menu {
   display: none;
 }
@@ -157,7 +147,6 @@ body {
 .shopping-cart .item-price {
   font-size: 1.1rem;
 }
-
 .shopping-cart .cart-item #add,
 .shopping-cart .cart-item #remove {
   display: inline-block;
@@ -179,6 +168,7 @@ body {
   margin-top: -1rem;
   text-align: center;
 }
+/* CSS untuk form shopping cart */
 .form-container {
   width: 100%;
   display: flex;
@@ -225,6 +215,7 @@ body {
   background-color: #d2d2d2;
   cursor: not-allowed;
 }
+
 /* Hero Section */
 .hero {
   min-height: 100vh;
@@ -314,7 +305,7 @@ body {
   color: white;
 }
 
-/* About Us */
+/* CSS untuk tapilan content */
 .about,
 .menu,
 .contact,
@@ -336,6 +327,7 @@ body {
 .products h2 span {
   color: #6b240c;
 }
+/* About Us */
 .about .row {
   display: flex;
 }
@@ -374,7 +366,8 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
-/* Menu Section */
+
+/* CSS untuk tampilan menu atua brand catalog yang tersedia */
 .menu .row {
   display: flex;
   flex-wrap: wrap;
@@ -421,7 +414,7 @@ body {
   transform: translateY(0);
 } */
 
-/* Producy Section */
+/* CSS untuk stock barnag atau product */
 .products .row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
@@ -481,7 +474,7 @@ body {
   font-weight: bold;
 }
 
-/* Contact Section */
+/* CSS untuk contact */
 .contact .row {
   display: flex;
   margin-top: 2rem;
@@ -532,12 +525,13 @@ body {
   background-color: #6b240c;
 }
 
-/* Footer */
+/* CSS untuk Footer */
 footer {
   background-color: var(--primary);
   text-align: center;
   padding: 1rem 0 3rem;
   margin-top: 3rem;
+  position: relative;
 }
 footer .socials {
   padding: 1rem 0;
@@ -637,10 +631,46 @@ footer .credit a {
   html {
     font-size: 75%;
     .hero .background-slideshow img {
+      width: 100%;
+      right: 0;
+      left: 0;
+      height: 100%;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      filter: hue-rotate(10deg) brightness(0.77);
+    }
+    .hero .background-slideshow img.active {
+      opacity: 1;
+    }
+  }
+}
+@media (max-width: 1100px) {
+  html {
+    font-size: 75%;
+    .hero .background-slideshow img {
       width: auto;
       right: 0;
       left: 0;
       height: 100%;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      filter: hue-rotate(10deg) brightness(0.77);
+    }
+    .hero .background-slideshow img.active {
+      opacity: 1;
+    }
+  }
+}
+@media (max-width: 1080px) {
+  html {
+    font-size: 75%;
+    .hero .background-slideshow img {
+      width: 100%;
+      right: 0;
+      left: 0;
+      height: auto;
       align-items: center;
       opacity: 0;
       transition: opacity 1s ease-in-out;
