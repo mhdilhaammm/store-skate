@@ -123,20 +123,20 @@ document.addEventListener("DOMContentLoaded", function () {
  * ============================================================================
  */
 // // Smoth scrolling untuk pengarah bagian
-// $(document).ready(function () {
-//   $("a[href^=\\#]").on("click", function (event) {
-//     var target = $(this.getAttribute("href"));
-//     if (target.length) {
-//       event.preventDefault();
-//       $("html, body").stop().animate(
-//         {
-//           scrollTop: target.offset().top,
-//         },
-//         900
-//       );
-//     }
-//   });
-// });
+$(document).ready(function () {
+  $("a[href^=\\#]").on("click", function (event) {
+    var target = $(this.getAttribute("href"));
+    if (target.length) {
+      event.preventDefault();
+      $("html, body").stop().animate(
+        {
+          scrollTop: target.offset().top,
+        },
+        900
+      );
+    }
+  });
+});
 
 /** =====================================================================
  * MODAL DIBUAT BERDASARKAN REFERENSI DARI PROGRAMMER UNPAS
